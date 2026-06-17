@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Prediction Result</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+
+    {% if bg_color == "green" %}
+    background:linear-gradient(135deg,#11998e,#38ef7d);
+    {% else %}
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
+    {% endif %}
+
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    background:white;
+    width:700px;
+    padding:30px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0px 10px 25px rgba(0,0,0,0.3);
+}
+
+img{
+    width:300px;
+    border-radius:15px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.result{
+    font-size:35px;
+    font-weight:bold;
+}
+
+.real{
+    color:green;
+}
+
+.fake{
+    color:red;
+}
+
+.confidence{
+    font-size:24px;
+}
+
+a{
+    text-decoration:none;
+    background:#6c63ff;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎯 Prediction Result</h1>
+
+    <img src="{{ url_for('static', filename='uploads/' ~ image_name) }}">
+
+    {% if prediction == "REAL" %}
+        <div class="result real">
+            🟢 REAL
+        </div>
+    {% else %}
+        <div class="result fake">
+            🔴 FAKE
+        </div>
+    {% endif %}
+
+    <br>
+
+    <div class="confidence">
+        Confidence: {{ confidence }}%
+    </div>
+
+    <br><br>
+
+    <a href="{{ url_for('home') }}">
+        🔄 Try Another Image
+    </a>
+
+</div>
+
+</body>
+</html>
